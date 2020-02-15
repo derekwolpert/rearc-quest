@@ -5,11 +5,11 @@ RUN git clone https://github.com/rearc/quest.git
 ENTRYPOINT ["sleep 10"]
 WORKDIR /quest/app
 # Copies the package.json into the working directory
-COPY quest/package.json /quest/app
+COPY /quest/package.json /quest/app
 # Executes the install command
 RUN npm install
 # Copies application files to the working directory
-COPY quest /quest/app
+COPY /quest/* /quest/app
 # Specfifes port that will be exposed for given container 
 EXPOSE 3000
 # Defines environment variables that are avaiable within the container
