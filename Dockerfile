@@ -3,13 +3,12 @@ FROM node:10
 # Sets the working directory
 RUN git clone https://github.com/rearc/quest.git
 WORKDIR /quest/app
-RUN cd quest
 # Copies the package.json into the working directory
-COPY package.json /app
+COPY quest/package.json /quest/app
 # Executes the install command
 RUN npm install
 # Copies application files to the working directory
-COPY . /app
+COPY quest /quest/app
 # Specfifes port that will be exposed for given container 
 EXPOSE 3000
 # Defines environment variables that are avaiable within the container
