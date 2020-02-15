@@ -2,6 +2,7 @@
 FROM node:10
 # Sets the working directory
 RUN git clone https://github.com/rearc/quest.git
+ENTRYPOINT ["sleep 10"]
 WORKDIR /quest/app
 # Copies the package.json into the working directory
 COPY quest/package.json /quest/app
