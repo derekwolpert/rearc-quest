@@ -1,8 +1,9 @@
 # Defines the base image to use to start the build process
 FROM node:10
 # Sets the working directory
-RUN git clone https://github.com/rearc/quest.git .
-WORKDIR /app
+RUN git clone https://github.com/rearc/quest.git
+WORKDIR /quest/app
+RUN cd quest
 # Copies the package.json into the working directory
 COPY package.json /app
 # Executes the install command
