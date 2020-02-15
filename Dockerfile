@@ -1,6 +1,6 @@
 # Defines the base image to use to start the build process
 FROM node:10
-# Sets the working directory for the project, in this case creates the directory since it did not previously exist
+# Sets (and creates if it doesn't already exist) the working directory
 WORKDIR /app
 # Downloads a zip file of the node.js app from the master branch
 RUN wget https://github.com/rearc/quest/archive/master.zip
