@@ -1,8 +1,9 @@
 FROM node:10
 RUN wget https://github.com/rearc/quest/archive/master.zip
 RUN unzip master.zip
+RUN rm -rf master.zip
 WORKDIR /quest-master/app
-COPY /quest-master/package.json /quest-master/app
+COPY /quest-master/package.json /app
 RUN npm install
 COPY /quest-master/. /app
 EXPOSE 3000
