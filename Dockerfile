@@ -13,7 +13,7 @@ RUN rm -rf master.zip quest-master
 # Executues the install command
 RUN npm install
 # Specfifes port that will be exposed for given container
-EXPOSE 80
+EXPOSE 3000
 # Defines environment variables that are avaiable within the container
 ENV SECRET_WORD TwelveFactor
 # Executes the start command
