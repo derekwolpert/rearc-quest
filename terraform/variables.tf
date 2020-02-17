@@ -1,4 +1,4 @@
 variable "aws_region" {
-  type = string
-  default = "us-east-2"
+    description = "Enter in a value for aws-region (e.g. us-east-1, us-west-2, etc.)"
+    type = string
 }
