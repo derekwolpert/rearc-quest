@@ -101,8 +101,3 @@ resource "aws_codebuild_webhook" "rearc-quest-codebuild-webhook" {
     }
   }
 }
-
-output "rearc-quest-container-repo_url" {
-  depends_on = [aws_ecr_repository.rearc-quest-container-repo]
-  value      = aws_ecr_repository.rearc-quest-container-repo.repository_url
-}
