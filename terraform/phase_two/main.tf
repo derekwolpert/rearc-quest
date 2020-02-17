@@ -3,15 +3,11 @@ variable "aws_region" {
   type = string
 }
 
-variable "ecr_repo_url" {
-  description = "Enter in the url of the ecr repo created at the end of phase one (e.g. xxxxxxxxxxxx.dkr.ecr.xx-xxxx-x.amazonaws.com/rearc-quest-container-repo)"
-  type = string
-}
-
 provider "aws" {
   region = var.aws_region
 }
 
 output "ecs_alb_dns" {
+  depends_on = [aws_alb.rearc-quest-alb]
   value = aws_alb.rearc-quest-alb.dns_name
 }
