@@ -8,7 +8,7 @@ variable "aws_region" {
   type = string
 }
 
-# There are no need for access_key and secret_key inputs if your AWS creditions are
+# There are no need for access_key and secret_key inputs if your AWS credential are
 # stored in their default location utlized in other AWS terminal controlled services
 # (e.g. awscli). Terraform should automatically fetch the correct authentication
 # information.
