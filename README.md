@@ -17,7 +17,7 @@ Creates a ECS cluster - along with container, task, and service definitions, and
 * Terraform version 0.12 (or greater) installed.
 * AWS CLI installed with appropiate IAM role access (e.g. Codebuild, ECR, ECS, logs, etc.).
 * AWS access key and secret key installed their default location, or Terraform configured to know where to find valid credentials.
-* The GitHub webhook connection within the Codebuild project in phase one requires OAuth permissions to be granted. Even though the GitHub repo used for this project is public, you might need to manually grant your AWS account access to GitHub. You can read more about this feature here: https://www.terraform.io/docs/providers/aws/r/codebuild_webhook.html.
+* The GitHub webhook connection within the Codebuild project in phase one requires OAuth permissions to be granted. Even though the GitHub repo used for this project is public, you might need to manually grant your AWS account access to GitHub. If you have any issues with this part of setup process, it may be helpful to look over the following resouce: https://www.terraform.io/docs/providers/aws/r/codebuild_webhook.html.
 
 ## Installation / Setup Instructions
 
@@ -38,9 +38,15 @@ Creates a ECS cluster - along with container, task, and service definitions, and
 ### Part 4
 1) Navigate a terminal window to the ``terraform_phase_two`` directory.
 2) Repeat the ``terraform init``, ``terraform plan`` and ``terraform apply`` process detailed in Part 2 to create the needed AWS resources.
-* Note - It will take a few minutes for these resources to be created. Both a HTTP and HTTPS url/DNS directed towards the project's loadbalancer will be outputted when Terraform finishes. It will take a few more minutes for the running Docker container on the ECS cluster to be publicly accesible through either the HTTP or HTTPS url.
+* Note - It will take a few minutes for this process to finsh. When completed, both a HTTP and HTTPS url directed towards the project's loadbalancer DNS will be outputted. It will take a few more minutes for the running Docker container on the ECS cluster to be publicly accesible through either the aforementioned HTTP or HTTPS url.
 
-## Limitations
+### Part 5 | Uninstall
+1) Navigate a terminal window to the ``terraform_phase_two`` directory and run ``terraform destroy``.
+2) Navigate a terminal window to the ``terraform_phase_one`` directory and run ``terraform destroy``.
+* Note - It's best to run ``terraform destroy`` for phase two before phase one, as phase two is reliant on the ECR repo in phase one. While comprehensive CI/CD is not implimented at the moment, future adjustments could make this ``terraform destroy`` order imperative to avoid unattended consequences.
+
+## Current Limitations
+
 
 ## Possible Improvements
 
