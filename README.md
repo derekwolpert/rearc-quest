@@ -1,5 +1,7 @@
 # Rearc Quest Dockerfile and Terraform Templates | Derek Wolpert
 
+![Secret Page Screenshot](readme_images/screenshot.png)
+
 ## Overview
 
 The Dockerfile and Terraform templates in this repository make it possible to create and deploy a "dockerized" version of the React Quest application entirely through AWS services. In order to create these resources within your AWS account, both groupings of Terraforms files (``terraform_phase_one`` & ``terraform_phase_two``) are needed, as well as properly installed Terraform and AWS CLI resources with appropriate IAM role access.
@@ -45,10 +47,7 @@ Creates a ECS cluster - along with container, task, and service definitions, and
 2) Navigate a terminal window to the ``terraform_phase_one`` directory and run ``terraform destroy``.
 * Note - It's best to run ``terraform destroy`` for phase two before phase one, as phase two is reliant on the ECR repo in phase one. While comprehensive CI/CD is not implemented at the moment, future adjustments could make this ``terraform destroy`` order imperative to avoid unattended consequences.
 
-## Current Limitations
-
-
-## Possible Improvements
-
-## Contact Information
-
+## Current Limitations / Possible Improvements
+* Ideally there would be only one group of Terraform files needed to be excuted. One of the reason for the current setup was due to an inablity to trigger the Codebuild process automatically upon the resouce's creation. Creating the task and container definitions used in phase two when there was no image yet in the ECR repo would cause an error. It should be noted that if a Docker image repo was provided, the phase two Terraform files could be refacted to complete the entire deployment process in one step.
+* Comprehensive CI/CD would aid significantly in deployment of this application. At the moment, a new Docker image is created within Codebuild and pushed to the ECR repo when there is a commit to the master branch of the derekwolpert/rearc-quest repo (t would useful if Codebuild was also triggered when there is a new commit to rearc/quest repo). Even if an updated image is placed into the ECR repo, the configured task running on the ECS cluster is not automatically restarted with the updated image. Addtionally, does not automatically restart the infrasture if there is a technical issue with the current deployment. It looks like AWS Codepipeline might be a useful feature to research in regards to building out CI/CD cycles to address these concerns.
+* The current infrasture setup only takes advantage of basic application autoscaling and loadbalancer configurations in it's current setup. Addtionally, AWS Fargate engine was utlized to further streamline the process of managing computing and networking resources. There is no doubt there would be a benefit to explore manual configurations settings in these regards to improve optimization and allocation of resources.
