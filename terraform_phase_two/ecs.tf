@@ -4,15 +4,16 @@ resource "aws_ecs_cluster" "rearc-quest-ecs-cluster" {
   name = "rearc-quest-ecs-cluster"
 }
 
-# Creates a log group when task are ran within the ECS cluster. This can be helpful
-# for debugging purposes if a unexpected issue arises.
+# Creates a log group for the ECS cluster, which allows the output of a task to be
+# logged and reviewed. This can be helpful for debugging purposes if a unexpected
+# issue arises.
 
 resource "aws_cloudwatch_log_group" "rearc-quest-task-log-group" {
   name = "rearc-quest-task-log-group"
 }
 
 # The Data block below allows information about the ECR repository created in phase one
-# to be accessiable within phase two - in this case, passing the correct Docker image
+# to be accessible within phase two - in this case, passing the correct Docker image
 # into the container and task definitions below.
 
 data "aws_ecr_repository" "rearc-quest-container-repo" {
@@ -54,7 +55,7 @@ resource "aws_ecs_task_definition" "rearc-quest-task-definition" {
   requires_compatibilities = ["FARGATE"]
 }
 
-# The ECS Service makes it possible to specifiy the given tasks to launch on the ECS
+# The ECS Service makes it possible to specify the given tasks to launch on the ECS
 # Cluster, and configure related attributes like the network and load balancer environments. 
 
 resource "aws_ecs_service" "rearc-quest-ecs-service" {
@@ -79,7 +80,7 @@ resource "aws_ecs_service" "rearc-quest-ecs-service" {
 
 # Basic application autoscaling resource, since there will never be more than one
 # task running in this ECS cluster configuration. If there were more tasks running,
-# you could impliment autoscaling policies to monitor and control memory and cpu
+# you could implement autoscaling policies to monitor and control memory and cpu
 # allocation - or you could set different resource allocation based on time of day.
 
 resource "aws_appautoscaling_target" "reacr-quest-autoscalling" {

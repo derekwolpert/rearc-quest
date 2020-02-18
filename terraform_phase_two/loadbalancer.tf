@@ -10,7 +10,7 @@ resource "aws_alb" "rearc-quest-alb" {
 }
 
 # Defines the connection between the loadbalancer, the vpc and ECS cluster, in how
-# the ECS cluster can be accessed from the loadbalancer via the idenified port on
+# the ECS cluster can be accessed from the loadbalancer via the identified port on
 # the given vpc.
 
 resource "aws_alb_target_group" "rearc-quest-target-group" {
@@ -32,10 +32,10 @@ resource "aws_alb_target_group" "rearc-quest-target-group" {
   depends_on = [aws_alb.rearc-quest-alb]
 }
 
-# Links provided SSL certificate to a AWS server certificate resource to be used with the
+# Links provided SSL certificate to an AWS server certificate resource to be used with the
 # load balancer. Since the SSL cert is self-signed there may be some difficulties accessing 
 # the HTTPS access point on some browsers. Therefore, this should be viewed as a proof 
-# of concept. In a production environment the cert would be properly confgured to prevent 
+# of concept. In a production environment the cert would be properly configured to prevent 
 # this issue. 
 
 resource "aws_iam_server_certificate" "rearc-quest-ssl-cert" {
@@ -45,8 +45,8 @@ resource "aws_iam_server_certificate" "rearc-quest-ssl-cert" {
 }
 
 # Creates an access point to the load balancer using HTTP protocol.
-# In ideally the HTTP access point would automatically redirect to the HTTPS
-# access point, but in this case I have left the HTTP access point accessible to
+# Ideally the HTTP access point might be set to automatically redirect to the HTTPS 
+# access point, but in this case, I have left the HTTP access point accessible to
 # the desired target group. 
 
 resource "aws_alb_listener" "rearc-quest-http-listener" {

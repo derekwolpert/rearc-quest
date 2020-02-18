@@ -1,4 +1,4 @@
-# AWS IAM role and policy to give appropriate access to pull a Docker image from a ECR
+# AWS IAM role and policy to give appropriate access to pull a Docker image from an ECR
 # repo to run within a ECS cluster.
 
 resource "aws_iam_role" "rearc-quest-ecs-task-execution-role" {
@@ -45,7 +45,7 @@ resource "aws_iam_role_policy" "rearc-quest-ecs-task-execution-policy" {
 POLICY
 }
 
-# AWS IAM role and policy to give appropriate access for application autoscalling
+# AWS IAM role and policy to give appropriate access for application autoscaling
 # features.
 
 resource "aws_iam_role" "rearc-quest-ecs-autoscaling-role" {
