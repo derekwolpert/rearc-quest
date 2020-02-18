@@ -8,11 +8,11 @@ The Dockerfile and Terraform templates in this repository make it possible to cr
 
 ### Phase One
 
-Creates a Codebuild project that imports this GitHub repo's latest master branch commit. The included ``buildspec.yml`` and ``Dockerfile`` direct Codebuild to create a Docker image from the latest build of the Rearc Quest application, and pushes the resulting Docker image into a ECR repository for storage and deployment in phase two.
+Creates a Codebuild project that imports this GitHub repo's latest master branch commit. The included ``buildspec.yml`` and ``Dockerfile`` direct Codebuild to create a Docker image from the latest build of the Rearc Quest application, and pushes the resulting Docker image into an ECR repository for storage and deployment in phase two.
 
 ### Phase Two
 
-Creates a ECS cluster - along with container, task, and service definitions, and basic auto scaling configuration - to run the "dockerized" version of the Rearc Quest application. The ECS cluster is routed through a VPC and Loadbalancer with neccessary security grouping access (including a self-signed SSL certificate for "mock" HTTPS access) to allow the running container to be accessible on a public facing DNS URL.
+Creates an ECS cluster - along with container, task, and service definitions, and basic auto scaling configuration - to run the "dockerized" version of the Rearc Quest application. The ECS cluster is routed through a VPC and Loadbalancer with necessary security grouping access (including a self-signed SSL certificate for "mock" HTTPS access) to allow the running container to be accessible on a public facing DNS URL.
 
 ## Prerequisites
 
@@ -44,7 +44,7 @@ Creates a ECS cluster - along with container, task, and service definitions, and
 
 1) In a terminal window run the command ``aws codebuild start-build --project-name rearc-quest-codebuild-project`` to instruct your AWS account to create a build.
 
-* NOTE - It can take 2-5 mins for the build process to be completed. While waiting for the build to propagate to the previously created ECR repo, this may be a great time to run to the bathroom or take a snack  break. Only proceed to Part 4 when you have confirmed that a Docker image has been stored in the ECR repository - otherwise Part 4 might fail.
+* NOTE - It can take 2-5 mins for the build process to be completed. While waiting for the build to propagate to the previously created ECR repo, this may be a great time to run to the bathroom or take a snack break. Only proceed to Part 4 when you have confirmed that a Docker image has been stored in the ECR repository - otherwise Part 4 might fail.
 
 ### Part 4
 
@@ -52,7 +52,7 @@ Creates a ECS cluster - along with container, task, and service definitions, and
 
 2) Repeat the ``terraform init``, ``terraform plan`` and ``terraform apply`` process detailed in Part 2 to create the needed AWS resources.
 
-* Note - It will take a few minutes for this process to finsh. When completed, both a HTTP and HTTPS URL directed towards the project's loadbalancer DNS will be outputted. It will take a few more minutes for the running Docker container on the ECS cluster to be publicly accessible through either the aforementioned HTTP or HTTPS URL.
+* Note - It will take a few minutes for this process to finish. When completed, both a HTTP and HTTPS URL directed towards the project's loadbalancer DNS will be outputted. It will take a few more minutes for the running Docker container on the ECS cluster to be publicly accessible through either the aforementioned HTTP or HTTPS URL.
 
 ### Part 5 | Uninstall
 
