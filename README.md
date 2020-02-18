@@ -20,9 +20,9 @@ Creates an ECS cluster - along with container, task, and service definitions, an
 
 * AWS CLI installed with appropriate IAM role access (e.g. Codebuild, ECR, ECS, logs, etc.).
 
-* AWS access key and secret key installed their default location, or Terraform configured to know where to find valid credentials.
+* AWS access key and secret key stored in their default location, or Terraform configured to know where to find valid credentials. See this AWS resource for details on how to set this up: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
 
-* The GitHub webhook connection within the Codebuild project in phase one requires OAuth permissions to be granted. Even though the GitHub repo used for this project is public, you might need to manually grant your AWS account access to GitHub. If you have any issues with this part of setup process, it may be helpful to look over the following resource: https://www.terraform.io/docs/providers/aws/r/codebuild_webhook.html.
+* The GitHub webhook connection within the Codebuild project in phase one requires OAuth permissions to be granted. Even though the GitHub repo used for this project is public, you might need to manually grant your AWS account access to GitHub. If you have any issues with this part of setup process, it may be helpful to look over the following resource: https://www.terraform.io/docs/providers/aws/r/codebuild_webhook.html
 
 ## Installation / Setup Instructions
 
