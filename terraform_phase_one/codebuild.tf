@@ -1,6 +1,12 @@
+# ECR Repository to store Docker image after it has been built
+
 resource "aws_ecr_repository" "rearc-quest-container-repo" {
   name = "rearc-quest-container-repo"
 }
+
+# Codebuild project to create the Docker image to use when deploying the project.
+# Docker image is built from a GitHub repo containing a Dockerfile and buildspec.yml
+# instructions.
 
 resource "aws_codebuild_project" "rearc-quest-codebuild-project" {
   name          = "rearc-quest-codebuild-project"
@@ -21,7 +27,6 @@ resource "aws_codebuild_project" "rearc-quest-codebuild-project" {
       name = "REARC_QUEST_ECR_URL"
       value = aws_ecr_repository.rearc-quest-container-repo.repository_url
     }
-
     privileged_mode = true
   }
 
@@ -39,6 +44,10 @@ resource "aws_codebuild_project" "rearc-quest-codebuild-project" {
   }
   source_version = "master"
 }
+
+# GitHub webhook connected to the Codebuild project
+# Forces a new build of the project to be created when a new commit is pushed to the
+#  master branch of the repo containing the Dockerfile and buildspec.yml instructions.
 
 resource "aws_codebuild_webhook" "rearc-quest-codebuild-webhook" {
   project_name = aws_codebuild_project.rearc-quest-codebuild-project.name

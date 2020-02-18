@@ -1,3 +1,7 @@
+# AWS IAM role and policy to give appropriate access to Codebuild to pull from a
+# GitHub repo, build a Docker image within Codebuild, and push the resulting Docker
+# image to a ECR repo.
+
 resource "aws_iam_role" "rearc-quest-codebuild-role" {
   name = "rearc-quest-codebuild-role"
 
